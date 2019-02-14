@@ -20,6 +20,10 @@ flag <- function() {
                                         description = description)
     }
     
+    parse <- function() {
+      commandArgs()
+    }
+    
     structure(class = "flag", environment())
 }
 
