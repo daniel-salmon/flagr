@@ -39,12 +39,10 @@ flagr <- function(program_name = regmatches(getwd(),
     value <- gsub(pattern_flag, "", x)
     value <- value[value != ""]
     if (length(value) == 0) return(convert_type(value = default, type = type))
-    pattern_true <- "(t(rue)?|1)$"
-    pattern_false <- "(f(alse)?|0)$"
     
     if (type == "logical") {
-      value <- gsub(pattern_true, "TRUE", value)
-      value <- gsub(pattern_false, "FALSE", value)
+      value <- gsub("(t(rue)?|1)$", "TRUE", value, ignore.case = TRUE)
+      value <- gsub("(f(alse)?|0)$", "FALSE", value, ignore.case = TRUE)
     }
     
     return(convert_type(value = value, type = type))
