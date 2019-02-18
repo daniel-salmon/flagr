@@ -90,7 +90,8 @@ flagr <- function(program_name = regmatches(getwd(),
 
 can_convert <- function(value = "", type = "character") {
   func <- eval(parse(text = paste0("as.", type)))
-  return(!any(is.na(suppressWarnings(func(value)))))
+  has_na <- any(is.na(suppressWarnings(func(value))))
+  return(!has_na)
 }
 
 convert_type <- function(value = "", type = "character") {
