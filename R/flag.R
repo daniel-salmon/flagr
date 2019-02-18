@@ -58,7 +58,7 @@ flag <- function(program_name = "flagr", trailingOnly = TRUE) {
                            character(1))
     flag_string <- paste(flag_strings, collapse = "")
     cat(paste0(pretty, flag_string, "\n"))
-    stop()
+    quit()
   }
   
   print(flagenv$args)
