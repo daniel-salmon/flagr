@@ -94,9 +94,7 @@ can_convert <- function(value = "", type = "character") {
 
 convert_type <- function(value = "", type = "character") {
   if (!can_convert(value, type)) {
-    warning(paste0("Unable to convert value to ", type,
-                   ". Returning as a character instead"))
-    return(as.character(value))
+    stop(paste0("Unable to convert ", value, " to ", type))
   }
   func <- eval(parse(text = paste0("as.", type)))
   return(func(value))
