@@ -24,7 +24,7 @@ flagr <- function(program_name = regmatches(getwd(),
     if (!(type %in% valid_types)) {
       stop(paste("Data type must be one of:", paste(valid_types, collapse = ",")))
     }
-    if (!can_conv(value = default, type = type)) {
+    if (!can_convert(value = default, type = type)) {
       stop(paste("Default value cannot be converted to", type))
     }
     
@@ -33,12 +33,12 @@ flagr <- function(program_name = regmatches(getwd(),
                                       default = default,
                                       description = description)
     x <- extract_flag(name)
-    if (is.null(x)) return(type_conv(value = default, type = type))
+    if (is.null(x)) return(convert_typeert(value = default, type = type))
     
     pattern_flag <- paste0("^-(-)?", name, "(=)?")
     value <- gsub(pattern_flag, "", x)
     value <- value[value != ""]
-    if (length(value) == 0) return(type_conv(value = default, type = type))
+    if (length(value) == 0) return(convert_type(value = default, type = type))
     pattern_true <- "(t(rue)?|1)$"
     pattern_false <- "(f(alse)?|0)$"
     
@@ -47,7 +47,7 @@ flagr <- function(program_name = regmatches(getwd(),
       value <- gsub(pattern_false, "FALSE", value)
     }
     
-    return(type_conv(value = value, type = type))
+    return(convert_type(value = value, type = type))
   }
   
   extract_flag <- function(x) {
@@ -88,13 +88,13 @@ flagr <- function(program_name = regmatches(getwd(),
   structure(class = "flagr", environment())
 }
 
-can_conv <- function(value = "", type = "character") {
+can_convert <- function(value = "", type = "character") {
   func <- eval(parse(text = paste0("as.", type)))
   return(!any(is.na(suppressWarnings(func(value)))))
 }
 
-type_conv <- function(value = "", type = "character") {
-  if (!can_conv(value, type)) {
+convert_type <- function(value = "", type = "character") {
+  if (!can_convert(value, type)) {
     warning(paste0("Unable to convert value to ", type,
                    ". Returning as a character instead"))
     return(as.character(value))
