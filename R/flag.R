@@ -1,4 +1,7 @@
-flag <- function(program_name = "flagr", trailingOnly = TRUE) {
+flag <- function(program_name = regmatches(getwd(), 
+                                           regexpr("^.*/", getwd()), 
+                                           invert = TRUE)[[1]][2], 
+                 trailingOnly = TRUE) {
   flagenv <- environment()
   valid_types <- c("character", "complex", "double", "integer", "logical")
   
@@ -99,15 +102,3 @@ type_conv <- function(value = "", type = "character") {
   func <- eval(parse(text = paste0("as.", type)))
   return(func(value))
 }
-
-# Tests
-flagr <- flag()
-slave <- flagr$add_flag(name = "slave")
-n_loops <- flagr$add_flag(name = "n_loops",
-                          type = "integer",
-                          default = 1,
-                          description = "Number of loops to perform")
-flagr$parse()
-print("Here's what your arguments look like")
-print(slave)
-print(n_loops)
