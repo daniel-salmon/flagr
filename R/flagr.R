@@ -1,7 +1,7 @@
-flag <- function(program_name = regmatches(getwd(), 
-                                           regexpr("^.*/", getwd()), 
-                                           invert = TRUE)[[1]][2], 
-                 trailingOnly = TRUE) {
+flagr <- function(program_name = regmatches(getwd(), 
+                                            regexpr("^.*/", getwd()), 
+                                            invert = TRUE)[[1]][2], 
+                  trailingOnly = TRUE) {
   flagenv <- environment()
   valid_types <- c("character", "complex", "double", "integer", "logical")
   
