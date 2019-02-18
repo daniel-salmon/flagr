@@ -33,7 +33,7 @@ flagr <- function(program_name = regmatches(getwd(),
                                       default = default,
                                       description = description)
     x <- extract_flag(name)
-    if (is.null(x)) return(convert_typeert(value = default, type = type))
+    if (is.null(x)) return(convert_type(value = default, type = type))
     
     pattern_flag <- paste0("^-(-)?", name, "(=)?")
     value <- gsub(pattern_flag, "", x)
