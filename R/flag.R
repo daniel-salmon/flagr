@@ -1,6 +1,6 @@
-flag <- function(program_name = "flagr") {
+flag <- function(program_name = "flagr", trailingOnly = TRUE) {
   flagenv <- environment()
-  flagenv$args <- commandArgs()
+  flagenv$args <- commandArgs(trailingOnly)
   flagenv$n_args <- length(flagenv$args)
   flagenv$flag_list <- list(program_name = program_name)
   flagenv$flag_list$help <- list(name = "help",
