@@ -85,7 +85,7 @@ flagr <- function(program_name = regmatches(getwd(),
     quit()
   }
   
-  structure(class = "flag", environment())
+  structure(class = "flagr", environment())
 }
 
 can_conv <- function(value = "", type = "character") {
