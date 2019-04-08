@@ -65,7 +65,7 @@ flagr <- function(program_name = regmatches(getwd(),
   }
   
   parse <- function() {
-    if (!is.null(extract_flag("h|(help)"))) return(help())
+    if (!is.null(extract_flag("^(h|(help))$"))) return(help())
   }
   
   help <- function() {
